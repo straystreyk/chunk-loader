@@ -1,4 +1,4 @@
-import {defineConfig, RsbuildPlugin} from '@rsbuild/core';
+import { defineConfig, type RsbuildPlugin } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import path from "path"
 import fs from "fs"
@@ -11,7 +11,7 @@ function ChunksManifestPlugin(): RsbuildPlugin {
         const outputPath = api.context.distPath;
         const publicPath = '/';
 
-        const json = stats?.toJson({ all: true, chunks: true, async: true });
+        const json = stats?.toJson({chunks:true});
 
         if (!json?.chunks) {
           console.warn('[ChunksManifestPlugin] No chunks found in stats.');
