@@ -13,14 +13,14 @@ function loadScript(url: string): Promise<void> {
 
         const script = document.createElement('script');
         script.src = url;
-        script.async = true;
+        script.defer = true
         script.onload = () => resolve();
         script.onerror = () => reject();
-        document.body.appendChild(script);
+        document.head.appendChild(script);
     });
 }
 
-function lazyWithRetry(factory: () => Promise<any>, chunkName: string, retries = 3, interval = 1000) {
+function lazyWithRetry(factory: () => Promise<any>, chunkName: string, retries = 3, interval = 250) {
     return _lazy(() => {
         return new Promise(async (resolve, reject) => {
             let lastError: any;
