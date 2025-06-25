@@ -14,7 +14,10 @@ function loadScript(url: string): Promise<void> {
         const script = document.createElement('script');
         script.src = url;
         script.defer = true
-        script.onload = () => resolve();
+        script.onload = () => {
+            resolve()
+            script.remove()
+        };
         script.onerror = () => reject();
         document.head.appendChild(script);
     });
